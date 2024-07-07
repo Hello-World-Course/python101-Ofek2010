@@ -84,8 +84,8 @@ class AssignmentTester(unittest.TestCase):
     def assertEqualWithMessage(self, first, second, msg: Message):
         msg.realResult = f"{first}"
         msg.expectedResult = f"{second}"
-        msg.expected_type = type(second)
-        msg.real_type = type(first)
+        msg.expected_type = type(second).__name__
+        msg.real_type = type(first).__name__
         self.assertEqual(second, first,
                          msg=msg)
 
