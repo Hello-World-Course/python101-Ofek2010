@@ -32,6 +32,10 @@ class Message:
         self.test_code = test_code
 
     def __str__(self) -> str:
+        try:
+            json.dumps(vars(self))
+        except Exception as e:
+            return f"@@@PREFIX@@@@@@SUFFIX@@@"
         return f"@@@PREFIX@@@{json.dumps(vars(self))}@@@SUFFIX@@@"
 
 
