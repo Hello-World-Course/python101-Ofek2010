@@ -32,6 +32,10 @@ class Message:
         self.test_code = test_code
 
     def __str__(self) -> str:
+        try:
+            json.dumps(vars(self))
+        except Exception as e:
+            return f"@@@PREFIX@@@@@@SUFFIX@@@"
         return f"@@@PREFIX@@@{json.dumps(vars(self))}@@@SUFFIX@@@"
 
 
@@ -80,8 +84,8 @@ class AssignmentTester(unittest.TestCase):
     def assertEqualWithMessage(self, first, second, msg: Message):
         msg.realResult = f"{first}"
         msg.expectedResult = f"{second}"
-        msg.expected_type = type(second)
-        msg.real_type = type(first)
+        msg.expected_type = type(second).__name__
+        msg.real_type = type(first).__name__
         self.assertEqual(second, first,
                          msg=msg)
 
